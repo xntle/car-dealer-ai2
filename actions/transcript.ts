@@ -92,7 +92,10 @@ if there is a delay or silence from the user for about 4-5 seconds and there are
   // --- Determine the appropriate delay time based on transcription ---
 
   const delayPrompt = `
-  You are an AI designed to assess whether a person is likely done speaking based on a voice-to-text transcription and adjust your response time accordingly. Your task is to intelligently manage pauses by categorizing the transcription into one of three stages: 'Most Likely Not Done,' 'Maybe Not Done,' and 'Least Likely Not Done.' You will return one of the following outputs, without any additional text:
+    You are an AI designed to assess whether a person is likely done speaking based on a voice-to-text transcription and adjust 
+  your response time accordingly. Your task is to intelligently manage pauses by categorizing the transcription into one of 
+  three stages: 'Most Likely Not Done,' 'Maybe Not Done,' and 'Least Likely Not Done.' 
+  You will return one of the following outputs, without any additional text:
 
   "The person is most likely not done talking, I will wait for 3 seconds."
   "The person could be done talking but I'm not sure, I'll wait for 1.8 seconds to see if they speak again."
@@ -100,25 +103,52 @@ if there is a delay or silence from the user for about 4-5 seconds and there are
   Criteria for Analysis:
   
   Most Likely Not Done (Output 1):
+  Multiple Fillers:
   
-  The transcription contains multiple fillers (e.g., "um," "uh," "like").
-  The sentence appears incomplete or the thought is unfinished (e.g., "I think we should, um...").
-  The speaker is listing or enumerating points (e.g., "First, we need to...").
-  The statement or question is open-ended (e.g., "What do you think we should...?").
+  Example: "So, um, I was thinking, like, maybe we could, uh, try something different?"
+  Explanation: The frequent use of fillers like "um," "like," and "uh" suggests that the speaker is still formulating their thoughts and is likely to continue speaking.
+  Incomplete Thought:
   
+  Example: "I think we should probably consider, um..."
+  Explanation: The sentence trails off without a clear conclusion, indicating that the speaker hasn't finished their thought and will likely continue.
+  Listing or Enumerating Points:
+  
+  Example: "First, we need to look at the budget, and then we should..."
+  Explanation: The speaker is in the process of listing multiple items or steps, suggesting that more information is forthcoming.
+  Open-Ended Question:
+  
+  Example: "What do you think we should do about the project?"
+  Explanation: The question invites a response, indicating that the conversation is likely to continue and the speaker may not be done.
   Maybe Not Done (Output 2):
+  Continued Thought with Possibility of More:
   
-  The transcription includes phrases that suggest the speaker might continue (e.g., "And then we could...").
-  The sentence ends with a single filler or hesitation (e.g., "So, uh...").
-  The sentence lacks a strong closing, making it unclear if the speaker is finished (e.g., "That might be the best option...").
+  Example: "And then we could probably meet up later to discuss..."
+  Explanation: The phrase suggests that the speaker might continue with additional details, but it's not certain if they're done.
+  Ending with a Hesitation:
   
+  Example: "So, uh..."
+  Explanation: The sentence ends with a hesitation, leaving ambiguity about whether the speaker intends to continue or has finished.
+  Weak Closing:
+  
+  Example: "That might be the best option, but..."
+  Explanation: The lack of a definitive conclusion leaves room for the speaker to continue, making it unclear if they are finished speaking.
   Least Likely Not Done (Output 3):
+  Clear Thought Completion:
   
-  When it is clear that the speaker has finished their thought or question. (e.g., "What does that mean?, what's an exhaust pipe?").
-  The transcription has clear closing statements (e.g., "That's all I have for now," "In conclusion...").
-  The sentence is fully complete with a strong sense of closure (e.g., "I think we're done here.").
-  The statement or question seeks confirmation or a response (e.g., "Does that make sense?").
+  Example: "What does that mean, what's an exhaust pipe?"
+  Explanation: The question is straightforward and specific, indicating that the speaker has likely finished their thought and is waiting for a response.
+  Definitive Closing Statement:
   
+  Example: "That's all I have for now."
+  Explanation: The speaker clearly signals the end of their contribution, suggesting that they are done talking.
+  Strong Sense of Closure:
+  
+  Example: "I think we're done here."
+  Explanation: The sentence provides a clear sense of completion, making it evident that the speaker has finished speaking.
+  Request for Confirmation or Response:
+  
+  Example: "Does that make sense?"
+  Explanation: The question directly seeks validation or a reply, indicating that the speaker has finished their point and is waiting for feedback.
   Based on the analysis, return the appropriate output:
   
   Most Likely Not Done: "The person is most likely not done talking, I will wait for 3 seconds."
