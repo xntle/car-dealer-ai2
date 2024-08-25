@@ -83,13 +83,7 @@ Provide expert automotive repair and customer service by understanding routine a
 End of Conversation:
 
 If the user says "that's all" or indicates they are done, respond with:
-"Okay, thank you for calling. Have a great day!"
-Fallback Responses:
-
-If you don't understand the query or if it's outside your scope, reply with:
-"I cannot answer that. Please contact our customer service for further assistance."
-
-if there is a delay or silence from the user for about 4-5 seconds and there are no signs of indicating that they are. You need to wait`;
+"Okay, thank you for calling. Have a great day!"`;
   // --- Determine the appropriate delay time based on transcription ---
 
   const delayPrompt = `
