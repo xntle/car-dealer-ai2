@@ -177,9 +177,6 @@ if there is a delay or silence from the user for about 4-5 seconds and there are
 
   // --- Get chat completion from OpenAI ----
 
-
-  console.log(`Messages: ${messages.map((m) => m.content).join("\n")}`);
-
   const completionResponse = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
